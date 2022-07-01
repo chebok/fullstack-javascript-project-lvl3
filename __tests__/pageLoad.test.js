@@ -1,15 +1,14 @@
 /* eslint-disable no-undef */
 import path from 'path';
-import { fileURLToPath } from 'url';
-import axios from 'axios';
+// import { fileURLToPath } from 'url';
 import nock from 'nock';
 import os from 'os';
 import fs from 'fs/promises';
 import pageLoad from '../src/pageLoad.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const fixturePath = path.join(__dirname, '..', '__fixtures__');
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
+// const fixturePath = path.join(__dirname, '..', '__fixtures__');
 let dest;
 beforeEach(async () => {
   dest = await fs.mkdtemp(path.join(os.tmpdir(), 'page-loader-'));
