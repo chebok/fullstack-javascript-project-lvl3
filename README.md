@@ -6,3 +6,5 @@
 [![Node CI](https://github.com/chebok/fullstack-javascript-project-lvl3/actions/workflows/test+lint.yml/badge.svg)](https://github.com/chebok/fullstack-javascript-project-lvl3/actions/workflows/test+lint.yml)
 ### Page-loader:
 <a href="https://asciinema.org/a/R5MsBKTh8E38JsKX2vhSmTnzy" target="_blank"><img src="https://asciinema.org/a/R5MsBKTh8E38JsKX2vhSmTnzy.svg" /></a>
+### Page-loader + Images:
+<a href="https://asciinema.org/a/LZ3mrDEjaVkOXxbYDimxV5Hlo" target="_blank"><img src="https://asciinema.org/a/LZ3mrDEjaVkOXxbYDimxV5Hlo.svg" /></a>
