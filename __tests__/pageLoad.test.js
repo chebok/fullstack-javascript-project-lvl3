@@ -12,8 +12,10 @@ const __dirname = path.dirname(__filename);
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 let dest;
 let testData;
+let testData2;
 beforeAll(async () => {
   testData = await fs.readFile(getFixturePath('test.html'), 'utf-8');
+  testData2 = await fs.readFile(getFixturePath('test2.html'), 'utf-8');
 });
 beforeEach(async () => {
   dest = await fs.mkdtemp(path.join(os.tmpdir(), 'page-loader-'));
@@ -31,15 +33,27 @@ test('pageLoad', async () => {
     .get('/courses')
     .reply(200, testData);
   const scope2 = nock('https://ru.hexlet.io')
-    .get('/courses/assets/professions/nodejs.png')
+    .get('/assets/professions/nodejs.png')
     .reply(200, 'img');
+  const scope3 = nock('https://ru.hexlet.io')
+    .get('/packs/js/runtime.js')
+    .reply(200, 'script');
+  const scope4 = nock('https://ru.hexlet.io')
+    .get('/assets/application.css')
+    .reply(200, 'link');
+  const scope5 = nock('https://ru.hexlet.io')
+    .get('/courses')
+    .reply(200, testData);
   const pathFile = await pageLoad('https://ru.hexlet.io/courses', dest);
   const data = await fs.readFile(pathFile, 'utf-8');
   const $ = cheerio.load(data);
   const imagePath = $('img').attr('src');
-  const imageData = await fs.readFile(imagePath, 'utf-8');
+  const imageData = await fs.readFile(path.join(dest, imagePath), 'utf-8');
   expect(scope.isDone()).toBe(true);
   expect(scope2.isDone()).toBe(true);
+  expect(scope3.isDone()).toBe(true);
+  expect(scope4.isDone()).toBe(true);
+  expect(scope5.isDone()).toBe(true);
   expect(imageData).toBe('img');
-  expect(data).not.toBe(testData);
+  expect(data).toBe(testData2);
 });
