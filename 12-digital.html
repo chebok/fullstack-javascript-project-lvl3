@@ -1,0 +1,156 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Интерактивное агентство. Придумываем, снимаем, разрабатываем</title>
+    <link rel="stylesheet" href="12-digital_files/12-digital-css-app.css?id=a4f64f69965ed77f484f32d2257bd9d6">
+    <link rel="icon" type="image/png" sizes="16x16" href="12-digital_files/12-digital-favicon.ico">
+    </head>
+<body>
+    <div class="cursor cursor--small">
+    <div class="interface-container">
+        <div class="cursor--dot"></div>
+            <div class="cursor--indicator"></div>
+            <div class="cursor-ring-mobile"></div>
+        <div class="cursor--plus">
+            <svg class="js-plus" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <line class="js-line-plus" x1="0.342651" y1="15.5" x2="31.6574" y2="15.5" stroke="white"></line>
+                <line class="js-line-plus" x1="16.5" y1="0.342651" x2="16.5" y2="31.6574" stroke="white"></line>
+            </svg>
+        </div>
+        
+        
+    </div>
+</div>
+<canvas class="cursor cursor--canvas" resize=""></canvas>
+
+        <header>
+    <nav class="navigation">
+
+        <a href="/" class="navigation__logo logo">
+            <img class="logo__img" src="12-digital_files/12-digital-images-logo.png" alt="">
+        </a>
+
+        <div class="js-navbar navigation__list">
+            <a href="/cases" class="js-nav-link navigation__link">cases</a>
+            <a href="/about" class="js-nav-link navigation__link">about</a>
+            <a href="/contacts" class="js-nav-link navigation__link">contact</a>
+        </div>
+
+        <div class="navigation__btn js-dropbtn">
+            <div class="js-burger-line burger-line"></div>
+            <div class="js-burger-line burger-line"></div>
+            <div class="js-burger-line burger-line"></div>
+        </div>
+
+        <div class="js-close-menu-btn navigation__close-btn">
+            <svg>
+                <use xlink:href="../../../images/sprite.svg#close-circle"></use>
+            </svg>
+        </div>
+    </nav>
+</header>
+
+<div class="js-dropdown-content mobile-nav">
+    <img class="mobile-nav__bg" src="12-digital_files/12-digital-images-backgrounds-navigation-bg.png" alt="">
+    <div class="mobile-nav__container">
+        <div class=" mobile-nav__dropdown-list">
+            <a href="/cases" class="js-mob-link mobile-nav__link">cases</a>
+            <a href="/about" class="js-mob-link mobile-nav__link">about</a>
+            <a href="/contacts" class="js-mob-link mobile-nav__link">contact</a>
+        </div>
+    </div>
+</div>
+
+
+        <div class="main scene">
+        <div class="contacts__request-popup js-request-popup">
+            <button id="request">Запрос на разрешение использования гироскопа</button>
+        </div>
+        <div class="js-start-screen start-screen">
+            <div class="start-screen__indicator-container">
+                <div class="js-start-indicator start-screen__indicator"></div>
+            </div>
+        </div>
+        <div class="figure-activator">
+            <div class="js-desktop-circle desktop-activator-container">
+                <div class="js-helper-circle helper-circle">
+                    <svg>
+                        <use xlink:href="../../../images/sprite.svg#circle-text"></use>
+                    </svg>
+                </div>
+                <div class="js-helper-circle helper-circle">
+                    <svg>
+                        <use xlink:href="../../../images/sprite.svg#circle-text"></use>
+                    </svg>
+                </div>
+                <div class="js-helper-circle helper-circle">
+                    <svg>
+                        <use xlink:href="../../../images/sprite.svg#circle-text"></use>
+                    </svg>
+                </div>
+                <div class="js-helper-circle helper-circle">
+                    <svg>
+                        <use xlink:href="../../../images/sprite.svg#circle-text"></use>
+                    </svg>
+                </div>
+                <div class="js-helper-circle helper-circle">
+                    <svg>
+                        <use xlink:href="../../../images/sprite.svg#circle-text"></use>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <div class="mobile-figure-activator">
+            <div class="js-mobile-arrow mobile-activator-container">
+                <div class="js-helper-arrow helper-arrow">
+                    <svg>
+                        <use xlink:href="../../../images/sprite.svg#mobile-indicator"></use>
+                    </svg>
+                </div>
+                <div class="js-helper-arrow helper-arrow">
+                    <svg>
+                        <use xlink:href="../../../images/sprite.svg#mobile-indicator"></use>
+                    </svg>
+                </div>
+                <div class="js-helper-arrow helper-arrow">
+                    <svg>
+                        <use xlink:href="../../../images/sprite.svg#mobile-indicator"></use>
+                    </svg>
+                </div>
+                <div class="js-helper-arrow helper-arrow">
+                    <svg>
+                        <use xlink:href="../../../images/sprite.svg#mobile-indicator"></use>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <div class="mobile-swiper-detector js-swipe-detector"></div>
+        <div class="desktop-mouseleave-detector"></div>
+        <div class="mast__container">
+            <div class="mast__icon">
+                <svg>
+                    <use xlink:href="../../../images/sprite.svg#circle-text"></use>
+                </svg>
+            </div>
+            <div class="mast__header --desktop">
+                <p class="mast__text">Додекаэдр — объект, состоящий </p>
+                <p class="mast__text">из 12 правильных пятиугольников, </p>
+                <p class="mast__text --break">которые являются его гранями. </p>
+                <p class="mast__text">Каждая грань символизирует одну </p>
+                <p class="mast__text">из наших ценностей: креативность,</p>
+                <p class="mast__text">экспертность, ответственность, честность,</p>
+                <p class="mast__text">партнерство, качество, вовлеченность,</p>
+                <p class="mast__text">взаимовыручка, командность, бесстрашие,</p>
+                <p class="mast__text">юмор, надежность.</p>
+            </div>
+            <div class="mast__header --mobile">
+                <p class="mast__text --mobile">Додекаэдр — объект, состоящий из 12 правильных</p>
+                <p class="mast__text --mobile --break">пятиугольников, которые являются его гранями. </p>
+            </div>
+        </div>
+    </div>
+
+<script src="12-digital_files/12-digital-js-app.js?id=8c6034529475ade569709a50cede279f"></script>
+
+
+</body></html>

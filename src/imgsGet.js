@@ -15,7 +15,6 @@ const imgsGet = (data, hostName, dest, filesDir, fixSource) => {
   const promises = src.map((imageUrl) => axios.get(`${hostName}${imageUrl}`)
     .then((response) => fs.writeFile(path.join(dest, filesDir, (`${fixSource}${imageUrl}`).replace(/[/]/g, '-')), response.data)));
   const promise = Promise.all(promises);
-  log('images download');
   return promise;
 };
 export default imgsGet;

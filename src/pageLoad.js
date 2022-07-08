@@ -3,7 +3,7 @@ import fs from 'fs/promises';
 import path from 'path';
 import url from 'url';
 import debug from 'debug';
-import 'axios-debug-log/enable.js';
+import 'axios-debug-log';
 import fixHtml from './fixHtml.js';
 import imgsGet from './imgsGet.js';
 import scriptsGet from './scriptsGet.js';
@@ -14,6 +14,7 @@ import linksGet from './linksGet.js';
 // const __filename = fileURLToPath(import.meta.url);
 // const __dirname = path.dirname(__filename);
 const log = debug('page-loader');
+debug.enable('page-loader');
 
 const pageLoad = (source, dest = '') => {
   const myUrl = new URL(source);
@@ -25,13 +26,29 @@ const pageLoad = (source, dest = '') => {
   const newDest = path.join(dest, newName);
 
   return axios.get(source).then(({ data }) => {
-    log('site is ok');
-    const newData = fixHtml(data, filesDir, fixSource, hostName);
+    log('url is correct');
+    
     return fs.mkdir(path.join(dest, filesDir))
-      .then(() => imgsGet(data, hostName, dest, filesDir, fixSource))
-      .then(() => scriptsGet(data, hostName, dest, filesDir, fixSource))
-      .then(() => linksGet(data, hostName, dest, filesDir, fixSource))
-      .then(() => fs.writeFile(newDest, newData));
-  }).then(() => newDest);
+      .then(() => {
+        log('dir was created');
+        return imgsGet(data, hostName, dest, filesDir, fixSource);
+      })
+      .then(() => {
+        log('images recieved');
+        return scriptsGet(data, hostName, dest, filesDir, fixSource);
+      })
+      .then(() => {
+        log('scripts recieved');
+        return linksGet(data, hostName, dest, filesDir, fixSource);
+      })
+      .then(() => {
+        log('links recieved');
+        const newData = fixHtml(data, filesDir, fixSource, hostName);
+        return fs.writeFile(newDest, newData);
+      });
+  }).then(() => {
+    log(`Create ${newDest}`);
+    return newDest;
+  });
 };
 export default pageLoad;

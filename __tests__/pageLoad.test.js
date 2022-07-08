@@ -4,9 +4,11 @@ import { fileURLToPath } from 'url';
 import nock from 'nock';
 import os from 'os';
 import fs from 'fs/promises';
+import debug from 'debug';
 import * as cheerio from 'cheerio';
 import pageLoad from '../src/pageLoad.js';
 
+const log = debug('page-loader');
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
@@ -19,12 +21,12 @@ beforeAll(async () => {
 });
 beforeEach(async () => {
   dest = await fs.mkdtemp(path.join(os.tmpdir(), 'page-loader-'));
-  console.log(`${dest} was created!`);
+  log(`${dest} was created!`);
 });
 
 afterEach(async () => {
   await fs.rm(dest, { recursive: true });
-  console.log(`${dest} was deleted!`);
+  log(`${dest} was deleted!`);
   dest = '';
 });
 
