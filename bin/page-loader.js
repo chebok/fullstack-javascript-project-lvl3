@@ -2,7 +2,8 @@
 import { program } from 'commander';
 import pageLoad from '../src/pageLoad.js';
 
-const command = (url) => pageLoad(url, program.opts().output).then(console.log);
+const command = (url) => pageLoad(url, program.opts().output)
+  .then(console.log);
 
 program
   .name('page-loader')
