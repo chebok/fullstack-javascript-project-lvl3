@@ -3,7 +3,10 @@ import { program } from 'commander';
 import pageLoad from '../src/pageLoad.js';
 
 const command = (url) => pageLoad(url, program.opts().output)
-  .then(console.log);
+  .then(console.log).catch((e) => {
+    console.error(e.message);
+    process.exitCode = 1;
+  });
 
 program
   .name('page-loader')

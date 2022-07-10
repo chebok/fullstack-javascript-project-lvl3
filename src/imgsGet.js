@@ -13,7 +13,12 @@ const imgsGet = (data, hostName, dest, filesDir, fixSource) => {
     return imgPath;
   }).get();
   const promises = src.map((imageUrl) => axios.get(`${hostName}${imageUrl}`)
-    .then((response) => fs.writeFile(path.join(dest, filesDir, (`${fixSource}${imageUrl}`).replace(/[/]/g, '-')), response.data)));
+    .catch((e) => {
+      log(`Problem to get image ${hostName}${imageUrl}\n Error ${e.response.status} ${e.response.statusText}`);
+      throw e;
+    })
+    .then((response) => fs.writeFile(path.join(dest, filesDir, (`${fixSource}${imageUrl}`).replace(/[/]/g, '-')), response.data))
+    .catch(() => log('Source not received! But program continue working')));
   const promise = Promise.all(promises);
   return promise;
 };

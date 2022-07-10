@@ -25,10 +25,16 @@ const pageLoad = (source, dest = '') => {
 
   const newDest = path.join(dest, newName);
 
-  return axios.get(source).then(({ data }) => {
+  return axios.get(source).catch((e) => {
+    if (e.response) {
+      throw new Error(`Problem to access ${source}\nError ${e.response.status} ${e.response.statusText}`);
+    } throw new Error(`Problem to access ${source}\n No response error`);
+  }).then(({ data }) => {
     log('url is correct');
-    
     return fs.mkdir(path.join(dest, filesDir))
+      .catch(() => {
+        throw new Error('Directory already exist!');
+      })
       .then(() => {
         log('dir was created');
         return imgsGet(data, hostName, dest, filesDir, fixSource);

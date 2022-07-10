@@ -6,6 +6,7 @@ import os from 'os';
 import fs from 'fs/promises';
 import debug from 'debug';
 import * as cheerio from 'cheerio';
+import prettier from 'prettier';
 import pageLoad from '../src/pageLoad.js';
 
 const log = debug('page-loader');
@@ -28,6 +29,13 @@ afterEach(async () => {
   await fs.rm(dest, { recursive: true });
   log(`${dest} was deleted!`);
   dest = '';
+});
+
+test('the axios fails with an error', () => {
+  expect.assertions(1);
+  return pageLoad('https://ru.hexlet.io/courseras', dest)
+    .catch((e) => expect(e.message)
+      .toMatch('Problem to access https://ru.hexlet.io/courseras\nError 404 Not Found'));
 });
 
 test('pageLoad', async () => {
@@ -57,5 +65,5 @@ test('pageLoad', async () => {
   expect(scope4.isDone()).toBe(true);
   expect(scope5.isDone()).toBe(true);
   expect(imageData).toBe('img');
-  // expect(data).toBe(testData2);
+  expect(data).toBe(testData2);
 });

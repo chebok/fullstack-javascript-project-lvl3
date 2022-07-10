@@ -1,8 +1,11 @@
 import axios from 'axios';
 import fs from 'fs/promises';
 import path from 'path';
+import debug from 'debug';
 import url from 'url';
 import * as cheerio from 'cheerio';
+
+const log = debug('page-loader');
 
 const linksGet = (data, hostName, dest, filesDir, fixSource) => {
   const $ = cheerio.load(data);
@@ -20,7 +23,8 @@ const linksGet = (data, hostName, dest, filesDir, fixSource) => {
     return linkPath;
   }).get().filter((a) => a !== 0);
   const promises = src.map((linkUrl) => axios.get(`${hostName}${linkUrl}`)
-    .then((response) => fs.writeFile(path.join(dest, filesDir, (`${fixSource}${linkUrl}`).replace(/[/]/g, '-')), response.data)));
+    .then((response) => fs.writeFile(path.join(dest, filesDir, (`${fixSource}${linkUrl}`).replace(/[/]/g, '-')), response.data))
+    .catch(() => log(`Problem to get link ${hostName}${linkUrl}`)));
   const promise = Promise.all(promises);
   return promise;
 };

@@ -13,6 +13,9 @@ const fixHtml = (html, filesDir, fixSource, hostName) => {
 
   $('script').each(function(i, elem) {
     const scriptPath = $(this).attr('src');
+    if (!scriptPath) {
+      return;
+    }
     if (!scriptPath.startsWith('/')) {
       const myUrl = new URL(scriptPath);
       const checkUrl = myUrl.origin;
