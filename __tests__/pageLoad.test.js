@@ -56,6 +56,8 @@ test('pageLoad', async () => {
     .reply(200, testData);
   const pathFile = await pageLoad('https://ru.hexlet.io/courses', dest);
   const data = await fs.readFile(pathFile, 'utf-8');
+  const fixData = prettier.format(data, { parser: 'html', printWidth: 150 });
+  const fixData2 = prettier.format(testData2, { parser: 'html', printWidth: 150 });
   const $ = cheerio.load(data);
   const imagePath = $('img').attr('src');
   const imageData = await fs.readFile(path.join(dest, imagePath), 'utf-8');
@@ -65,5 +67,5 @@ test('pageLoad', async () => {
   expect(scope4.isDone()).toBe(true);
   expect(scope5.isDone()).toBe(true);
   expect(imageData).toEqual('img');
-  expect(data).toEqual(testData2);
+  expect(fixData).toEqual(fixData2);
 });
