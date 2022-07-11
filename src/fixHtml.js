@@ -5,7 +5,10 @@ import url from 'url';
 const hasExt = (pathname) => (pathname.includes('.') ? pathname : `${pathname}.html`);
 
 const fixHtml = (html, filesDir, fixSource, hostName) => {
-  const $ = cheerio.load(html);
+  const $ = cheerio.load(html, {
+    normalizeWhitespace: true,
+    decodeEntities: false,
+  });
   $('img').each(function(i, elem) {
     const imgPath = $(this).attr('src');
     $(this).attr('src', path.join(filesDir, (`${fixSource}${imgPath}`).replace(/[/]/g, '-')));
