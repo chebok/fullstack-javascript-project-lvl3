@@ -43,7 +43,6 @@ const fixHtml = (html, filesDir, fixSource, hostName) => {
   });
   const htmlka = $.html();
   const fixin = prettier.format(htmlka, { parser: 'html', printWidth: 150 });
-  console.log(fixin.slice(0, -1));
-  return fixin.slice(0, -1);
+  return fixin.slice(0, -1).replace(/\s[/]/g, '');
 };
 export default fixHtml;
