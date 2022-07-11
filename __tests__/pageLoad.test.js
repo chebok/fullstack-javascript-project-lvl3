@@ -64,6 +64,6 @@ test('pageLoad', async () => {
   expect(scope3.isDone()).toBe(true);
   expect(scope4.isDone()).toBe(true);
   expect(scope5.isDone()).toBe(true);
-  expect(imageData).toBe('img');
-  expect(data).toBe(testData2);
+  expect(imageData).toEqual('img');
+  expect(data).toEqual(testData2);
 });
