@@ -41,6 +41,9 @@ const fixHtml = (html, filesDir, fixSource, hostName) => {
       } return;
     } $(this).attr('href', path.join(filesDir, (`${fixSource}${hasExt(linkPath)}`).replace(/[/]/g, '-')));
   });
-  return prettier.format($.html(), { parser: 'html', printWidth: 150 });
+  const htmlka = $.html();
+  const fixin = prettier.format(htmlka, { parser: 'html', printWidth: 150 });
+  console.log(fixin.slice(0, -1));
+  return fixin.slice(0, -1);
 };
 export default fixHtml;
