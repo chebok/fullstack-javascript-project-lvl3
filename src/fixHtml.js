@@ -1,5 +1,6 @@
 import path from 'path';
 import * as cheerio from 'cheerio';
+import prettier from 'prettier';
 import url from 'url';
 
 const hasExt = (pathname) => (pathname.includes('.') ? pathname : `${pathname}.html`);
@@ -40,6 +41,6 @@ const fixHtml = (html, filesDir, fixSource, hostName) => {
       } return;
     } $(this).attr('href', path.join(filesDir, (`${fixSource}${hasExt(linkPath)}`).replace(/[/]/g, '-')));
   });
-  return $.html();
+  return prettier.format($.html(), { parser: 'html', printWidth: 150 });
 };
 export default fixHtml;
