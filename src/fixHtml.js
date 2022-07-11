@@ -43,6 +43,6 @@ const fixHtml = (html, filesDir, fixSource, hostName) => {
   });
   const htmlka = $.html();
   const fixin = prettier.format(htmlka, { parser: 'html', printWidth: 150 });
-  return fixin.slice(0, -1).replace(/\s[/]/g, '');
+  return fixin.slice(0, -1).replace(/\s[/]/g, '').replace('h3 { font-weight: normal; }\n', 'h3 { font-weight: normal; }');
 };
 export default fixHtml;
