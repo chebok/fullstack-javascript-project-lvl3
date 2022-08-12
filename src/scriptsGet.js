@@ -1,16 +1,12 @@
 import axios from 'axios';
 import fs from 'fs/promises';
 import path from 'path';
-import debug from 'debug';
 import Listr from 'listr';
-import url from 'url';
 import * as cheerio from 'cheerio';
-
-const log = debug('page-loader');
 
 const scriptsGet = (data, hostName, dest, filesDir, fixSource) => {
   const $ = cheerio.load(data);
-  const src = $('script').map(function(i, el) {
+  const src = $('script').map(function script() {
     const scriptPath = $(this).attr('src');
     if (!scriptPath) {
       return 0;

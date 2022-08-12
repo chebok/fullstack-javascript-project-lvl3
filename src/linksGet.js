@@ -3,14 +3,13 @@ import fs from 'fs/promises';
 import path from 'path';
 import debug from 'debug';
 import Listr from 'listr';
-import url from 'url';
 import * as cheerio from 'cheerio';
 
 const log = debug('page-loader');
 
 const linksGet = (data, hostName, dest, filesDir, fixSource) => {
   const $ = cheerio.load(data);
-  const src = $('link').map(function(i, el) {
+  const src = $('link').map(function link() {
     const linkPath = $(this).attr('href');
     if (!linkPath.startsWith('/')) {
       const myUrl = new URL(linkPath);

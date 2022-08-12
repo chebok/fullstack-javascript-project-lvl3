@@ -1,7 +1,5 @@
 import path from 'path';
 import * as cheerio from 'cheerio';
-import prettier from 'prettier';
-import url from 'url';
 
 const hasExt = (pathname) => (pathname.includes('.') ? pathname : `${pathname}.html`);
 
@@ -10,12 +8,12 @@ const fixHtml = (html, filesDir, fixSource, hostName) => {
     normalizeWhitespace: true,
     decodeEntities: false,
   });
-  $('img').each(function(i, elem) {
+  $('img').each(function img() {
     const imgPath = $(this).attr('src');
     $(this).attr('src', path.join(filesDir, (`${fixSource}${imgPath}`).replace(/[/]/g, '-')));
   });
 
-  $('script').each(function(i, elem) {
+  $('script').each(function script() {
     const scriptPath = $(this).attr('src');
     if (!scriptPath) {
       return;
@@ -30,7 +28,7 @@ const fixHtml = (html, filesDir, fixSource, hostName) => {
     } $(this).attr('src', path.join(filesDir, (`${fixSource}${hasExt(scriptPath)}`).replace(/[/]/g, '-')));
   });
 
-  $('link').each(function(i, elem) {
+  $('link').each(function link() {
     const linkPath = $(this).attr('href');
     if (!linkPath.startsWith('/')) {
       const myUrl = new URL(linkPath);

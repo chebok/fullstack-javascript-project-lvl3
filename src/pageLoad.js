@@ -1,7 +1,6 @@
 import axios from 'axios';
 import fs from 'fs/promises';
 import path from 'path';
-import url from 'url';
 import debug from 'debug';
 import 'axios-debug-log';
 import fixHtml from './fixHtml.js';

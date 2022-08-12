@@ -3,13 +3,10 @@ import fs from 'fs/promises';
 import path from 'path';
 import Listr from 'listr';
 import * as cheerio from 'cheerio';
-import debug from 'debug';
-
-const log = debug('page-loader');
 
 const imgsGet = (data, hostName, dest, filesDir, fixSource) => {
   const $ = cheerio.load(data);
-  const src = $('img').map(function(i, el) {
+  const src = $('img').map(function img() {
     const imgPath = $(this).attr('src');
     if (!imgPath) {
       return 0;

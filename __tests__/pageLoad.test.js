@@ -56,7 +56,6 @@ test('pageLoad', async () => {
     .reply(200, testData);
   const pathFile = await pageLoad('https://ru.hexlet.io/courses', dest);
   const data = await fs.readFile(pathFile, 'utf-8');
-  const fixData2 = prettier.format(testData2, { parser: 'html', printWidth: 150 });
   const $ = cheerio.load(data);
   const imagePath = $('img').attr('src');
   const imageData = await fs.readFile(path.join(dest, imagePath), 'utf-8');
