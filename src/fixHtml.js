@@ -41,8 +41,8 @@ const fixHtml = (html, filesDir, fixSource, hostName) => {
       } return;
     } $(this).attr('href', path.join(filesDir, (`${fixSource}${hasExt(linkPath)}`).replace(/[/]/g, '-')));
   });
-  const htmlka = $.html();
-  const fixin = prettier.format(htmlka, { parser: 'html', printWidth: 150 });
+  // const htmlka = $.html();
+  // const fixin = prettier.format(htmlka, { parser: 'html', printWidth: 150 });
   // return fixin.slice(0, -1).replace(/\s[/]/g, '')
   // .replace('h3 { font-weight: normal; }\n', 'h3 { font-weight: normal; }');
   return $.html();

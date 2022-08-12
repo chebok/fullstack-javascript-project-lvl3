@@ -27,14 +27,14 @@ const linksGet = (data, hostName, dest, filesDir, fixSource) => {
   const assetsTasks = uniqsrc.map((linkUrl) => {
     const objTask = {
       title: `Save ${linkUrl}`,
-      task: () => axios.get(`${hostName}${linkUrl}`)
+      task: () => axios.get(`${hostName}${linkUrl}`, { responseType: 'arraybuffer' })
         .catch((e) => {
           if (e.response) {
             throw new Error(`Problem to access ${hostName}${linkUrl}\nError ${e.response.status} ${e.response.statusText}`);
           } throw new Error(`Problem to access ${hostName}${linkUrl}\n No response error`);
         })
         .then((response) => fs.writeFile(path.join(dest, filesDir, (`${fixSource}${linkUrl}`).replace(/[/]/g, '-')), response.data))
-        .catch(console.error)
+        .catch(console.error),
     };
     return objTask;
   });
