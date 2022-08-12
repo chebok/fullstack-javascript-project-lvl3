@@ -29,11 +29,11 @@ const scriptsGet = (data, hostName, dest, filesDir, fixSource) => {
   const assetsTasks = uniqsrc.map((scriptUrl) => {
     const objTask = {
       title: `Save ${scriptUrl}`,
-      task: () => axios.get(`${hostName}${scriptUrl}`)
+      task: () => axios.get(`${hostName}${scriptUrl}`, { responseType: 'arraybuffer' })
         .catch((e) => {
           if (e.response) {
-            throw new Error(`Problem to access ${hostName}${linkUrl}\nError ${e.response.status} ${e.response.statusText}`);
-          } throw new Error(`Problem to access ${hostName}${linkUrl}\n No response error`);
+            throw new Error(`Problem to access ${hostName}${scriptUrl}\nError ${e.response.status} ${e.response.statusText}`);
+          } throw new Error(`Problem to access ${hostName}${scriptUrl}\n No response error`);
         })
         .then((response) => fs.writeFile(path.join(dest, filesDir, (`${fixSource}${scriptUrl}`).replace(/[/]/g, '-')), response.data))
         .catch(console.error),

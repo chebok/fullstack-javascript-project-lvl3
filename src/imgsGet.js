@@ -29,7 +29,7 @@ const imgsGet = (data, hostName, dest, filesDir, fixSource) => {
   const assetsTasks = uniqsrc.map((imageUrl) => {
     const objTask = {
       title: `Save ${imageUrl}`,
-      task: () => axios.get(`${hostName}${imageUrl}`)
+      task: () => axios.get(`${hostName}${imageUrl}`, { responseType: 'arraybuffer' })
         .catch((e) => {
           if (e.response) {
             throw new Error(`Problem to access ${hostName}${imageUrl}\nError ${e.response.status} ${e.response.statusText}`);
