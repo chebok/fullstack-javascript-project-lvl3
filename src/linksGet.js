@@ -33,7 +33,11 @@ const linksGet = (data, hostName, dest, filesDir, fixSource) => {
             throw new Error(`Problem to access ${hostName}${linkUrl}\nError ${e.response.status} ${e.response.statusText}`);
           } throw new Error(`Problem to access ${hostName}${linkUrl}\n No response error`);
         })
-        .then((response) => fs.writeFile(path.join(dest, filesDir, (`${fixSource}${linkUrl}`).replace(/[/]/g, '-')), response.data))
+        .then((response) => {
+          const resultPath = (path.extname(linkUrl) === '') ? (`${fixSource}${linkUrl}.html`).replace(/[/]/g, '-') : (`${fixSource}${linkUrl}`).replace(/[/]/g, '-');
+          fs.writeFile(path.join(dest, filesDir, resultPath), response.data);
+          log(path.join(dest, filesDir, resultPath));
+        })
         .catch(console.error),
     };
     return objTask;
