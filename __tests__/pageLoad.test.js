@@ -6,7 +6,6 @@ import os from 'os';
 import fs from 'fs/promises';
 import debug from 'debug';
 import * as cheerio from 'cheerio';
-import prettier from 'prettier';
 import pageLoad from '../src/pageLoad.js';
 
 const log = debug('page-loader');
@@ -31,11 +30,9 @@ afterEach(async () => {
   dest = '';
 });
 
-test('the axios fails with an error', () => {
-  expect.assertions(1);
-  return pageLoad('https://ru.hexlet.io/courseras', dest)
-    .catch((e) => expect(e.message)
-      .toMatch('Problem to access https://ru.hexlet.io/courseras\nError 404 Not Found'));
+test('the axios fails with an error', async () => {
+  await expect(() => pageLoad('https://ru.hexlet.io/courseras'))
+    .rejects.toThrow('Problem to access https://ru.hexlet.io/courseras\nError 404 Not Found');
 });
 
 test('pageLoad', async () => {
